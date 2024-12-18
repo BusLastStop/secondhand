@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="icon" href="${path}/resources/images/red.png" type="image/x-icon"/>
+<link rel="icon" href="${path}/resources/images/green.png" type="image/x-icon"/>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <style>
@@ -15,13 +15,15 @@
 		font-optical-sizing: auto;
 		font-weight: 500;
 		font-style: normal;
-		/* border:1px solid #ff8a65; */
+		border:1px solid #9ccc65;
 		color:#212121;
 	}
 	body{ overflow-y:scroll;overflow-x:hidden; }
 	header{display:flex;flex-direction:column;align-items:center;}
 	div#headerUser{display:flex;justify-content:flex-end;align-items:center;width:80%;padding:3px}
-	div#headerMenu{display:flex; justify-content: space-around;align-items: center;width:80%}
+	div#headerMenu{display:flex; justify-content:center;align-items:flex-start;width:80%}
+	div#headerMenu h2{ margin:0; }
+	div#headerMenu button{ background-color:f5f5f5;color:9ccc65;border:1px solid #9ccc65;margin-left:20px;font-size:16px;width:65px;height:32px; }
 	div#footer{display:flex;justify-content:space-around;align-items:center}
 	#headerUser a{ margin-right:10px; }
 	#headerMenu>*{cursor:pointer;}
@@ -40,31 +42,22 @@
 </head>
 <body>
 <header>
-	<c:if test="${empty sessionScope.user}">
-		<div id="headerUser">
-			<a href="${path}/student/loginpage.do">로그인</a>
-			<a href="${path}/student/enrollpage.do">회원가입</a>
-		</div>
-	</c:if>
-	<c:if test="${not empty sessionScope.user}">
-		<div id="headerUser">
-			<div class="dropdown">
-				<a href="#" onclick="dropdownList()" id="userMenu">닉네님님</a>
-				<ul>
-					<li class="dropdownList" onclick="location.assign('${path}/student/mypage.do')">마이페이지</li>
-					<li class="dropdownList">알림</li>
-				</ul>
-			</div>
-			<a href="${path}/member/logout.do">로그아웃</a>
-		</div>
-	</c:if>
 	<div id="headerMenu">
-		<a href="${path}"><img src="${path}/resources/images/red.png" width="100" height="60"></a>
-		<h2>녹화 강의</h2>
-		<h2>실시간 강의</h2>
-		<h2>나의 강의정보</h2>
-		<h2>정보공유</h2>
-		<h2>마이페이지</h2>
+		<a href="${path}"><img src="${path}/resources/images/green.png" width="100" height="60"></a>
+		<div style="width:60%;">
+			<form action="" method="get" style="display:flex;justify-content:center;align-items:center;height:60px;margin:0;font-size:16px;">
+				<input type="text" name="search" placeholder="검색어 입력" style="width:70%;height:32px;">
+				<button type="submit">검색</button>
+			</form>
+			<div style="display:flex;justify-content:center;align-items:center;">
+				<h2 style="margin:5px 0 5px 0;">상품 목록</h2>
+				<h2 style="margin:5px 0 5px 0;">지도, 상품</h2>
+			</div>
+		</div>
+		<div style="display:flex;justify-content:center;align-items:center;">
+			<h2 style="margin:8px 0 0 10px;">판매하기</h2>
+			<h2 style="margin:8px 0 0 10px;">마이페이지</h2>
+		</div>
 	</div>
 	<script>
 		const dropdownList=()=>{
