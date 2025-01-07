@@ -10,15 +10,20 @@
 	.list-container{ width:80%;height:80%;background-color:#f5f5f5; }
 	.title{ display:inline-block;margin-left:5%; }
 	.video-class .video-contents{ display:inline-block;width:24%;padding:10px;margin:0; }
-	.video-contents img{ width:150px;height:100px; }
+	.video-contents>img{ width:150px;height:100px; }
 	.video-contents h4{ margin:5px 0 5px 0; }
 	.video-contents p{ margin:0; }
 	button{ border:1px solid #ff8a65;background-color:#ffccbd; }
+	.container-header{display: flex; justify-content:space-between; align-items: center;}
+	.board_list{margin-right:5%;font-size:16px;}
+	.letter{}
 </style>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="path" value="${pageContext.request.contextPath}"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 <section>
 	<div style="display:flex;justify-content:center;align-items:flex-start;overflow:hidden;height:50%;">
-		<img src="${pageContext.request.contextPath}/resources/images/community.png" width="1887px" style="opacity:70%;">
+		<img src="${path}/resources/images/community.png" width="1887px" style="opacity:70%;">
 		<div class="promotion">
 			<h2 style="color:#212121;">학습의 연장 교재 거래</h2>
  			<h3 style="color:#212121;">강사와 학생 간의 신뢰할 수 있는 중고 거래</h3>
@@ -27,31 +32,21 @@
 	<div style="display:flex;justify-content:center;align-items:center;">
 		<div class="video-class">
 			<div class="list-container">
-				<h2 class="title">인기 상품</h2><br>
+				<div class="container-header">
+					<h2 class="title">인기 상품</h2>
+					<button class="board_list" onclick="location.assign('${path}/commodity/board.do')">+</button>
+				</div>
 				<div style="width:90%;margin:auto;display:flex;justify-content:flex-start;align-items:center;">
-					<div class="video-contents">
-						<img src="${pageContext.request.contextPath}/resources/images/class1.jpeg" alt="강의사진">
+					<div class="video-contents" id="boardView">
+						<img src="${path}/resources/images/class1.jpeg" alt="강의사진">
 						<h4>튀김먹고싶다</h4>
 						<div style="display:flex;">
 							<p>튀김나라</p>
 							<p>|</p>
-							<p>날짜</p>
-						</div>
-					</div>
-					<div class="video-contents">
-						<img src="${pageContext.request.contextPath}/resources/images/class1.jpeg" alt="강의사진">
-						<h4>C++ 파일</h4>
-						<div style="display:flex;">
-							<p>코딩백수</p>
-							<p>|</p>
-							<p>날짜</p>
-						</div>
-					</div>
-					<div class="video-contents">
-						<img src="${pageContext.request.contextPath}/resources/images/class1.jpeg" alt="강의사진">
-						<h4>4년동안 코딩 공부</h4>
-						<div style="display:flex;">
-							<p>코딩안하면코손실</p>
+							<div style="display: flex; align-items: center;">
+							  <img src="https://img.freepik.com/premium-vector/comment-icon_414847-476.jpg" alt="댓글수" style="width: 30px; height: 30px;">
+							  <span style="font-size: 16px; height: 30px; line-height: 30px;">5</span>
+							</div>
 							<p>|</p>
 							<p>날짜</p>
 						</div>
@@ -61,4 +56,9 @@
 		</div>
 	</div>
 </section>
+<script>
+	$("#boardView").click(e=>{
+		location.assign("${path}/commodity/board/view.do");
+	});
+</script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
