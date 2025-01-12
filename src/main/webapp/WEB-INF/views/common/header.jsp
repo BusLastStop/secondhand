@@ -15,7 +15,7 @@
 		font-optical-sizing: auto;
 		font-weight: 500;
 		font-style: normal;
-		border:1px solid #9ccc65;
+		
 		color:#212121;
 	}
 	body{ overflow-y:scroll;overflow-x:hidden; }
@@ -26,7 +26,7 @@
 	div#headerMenu button{ background-color:f5f5f5;color:9ccc65;border:1px solid #9ccc65;margin-left:20px;font-size:16px;width:65px;height:32px; }
 	div#footer{display:flex;justify-content:space-around;align-items:center}
 	#headerUser a{ margin-right:10px; }
-	#headerMenu>*{cursor:pointer;}
+	#headerMenu>*{cursor:pointer;border:1px solid #9ccc65;}
 	#category{display:flex;padding:0;margin-right:5%;justify-contents:center;align-items:center;}
 	#category>li{margin-left:10px;margin-right:10px}
 	.writer-container{background-color:f5f5f5;}
@@ -136,8 +136,8 @@
 				<button type="submit">검색</button>
 			</form>
 			<div style="display:flex;justify-content:center;align-items:center;">
-				<h2 style="margin:5px 0 5px 0;"><a href="${path}/commodity/board.do">상품 목록</a></h2>
-				<h2 style="margin:5px 0 5px 0;"><a href="${path}/commoditymap/board.do">지도, 상품</a></h2>
+				<h2 style="border:1px solid #9ccc65;margin:5px 0 5px 0;"><a href="${path}/commodity/board.do">상품 목록</a></h2>
+				<h2 style="border:1px solid #9ccc65;margin:5px 0 5px 0;"><a href="${path}/commoditymap/board.do">지도, 상품</a></h2>
 				<c:if test="${sessionScope.loginMember.memAuthority=='m' || sessionScope.loginMember.memAuthority=='M'}">
 					<h2 style="margin:5px 0 5px 0;"><a href="${path}/commodity/report/board.do">상품 신고 관리</a></h2>
 					<h2 style="margin:5px 0 5px 0;"><a href="${path}/member/report.do">회원 신고 관리</a></h2>
