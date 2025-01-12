@@ -54,7 +54,6 @@
 		border:1px solid #BBDEFB;
 	}
 </style>
-<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<div id="login-container">
 		<a href="${path}"><img src="${path}/resources/images/blue.png" width="100" height="60"></a>
 		<h1>회원가입! 환영합니다!</h1>
@@ -214,4 +213,3 @@
 			},500);
 		});
 	</script>
-<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
