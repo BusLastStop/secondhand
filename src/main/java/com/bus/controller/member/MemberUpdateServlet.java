@@ -1,7 +1,6 @@
 package com.bus.controller.member;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,16 +11,16 @@ import com.bus.model.dto.member.Member;
 import com.bus.model.service.member.MemberService;
 
 /**
- * Servlet implementation class MemberEnrollEndServlet
+ * Servlet implementation class MemberUpdateServlet
  */
-@WebServlet("/member/enrollEnd.do")
-public class MemberEnrollEndServlet extends HttpServlet {
+@WebServlet(name="memberUpdate", urlPatterns="/member/update.do")
+public class MemberUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberEnrollEndServlet() {
+    public MemberUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,50 +31,52 @@ public class MemberEnrollEndServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
+		String memCode = request.getParameter("memCode");
 		String memId = request.getParameter("memId");
+		Member member = new MemberService().memberIdCheck(memId);
+		
 		String memPw = request.getParameter("memPw");
 		String memName = request.getParameter("memName");
-		String memGender = request.getParameter("memGender");
 		String memPhone = request.getParameter("memPhone");
 		String memEmail = request.getParameter("memEmail");
-		String memBirthDate = request.getParameter("memBirthDate");
 		String address = request.getParameter("memAddress");
 		String memLatitude = request.getParameter("memLatitude");
 		String memLongitude = request.getParameter("memLongitude");
-		
-		String memAddress;
+		String memAddress = member.getMemAddress();
 		String[] myAddress = address.split(", ");
-		switch (myAddress.length) {
-	        case 6:
-	            memAddress = myAddress[5] + " " + myAddress[3] + " " + myAddress[2] + " " + myAddress[1];
-	            break;
-	        case 5:
-	        	memAddress = myAddress[4] + " " + myAddress[2] + " " + myAddress[1] + " " + myAddress[0];
-	        case 4:
-	        	memAddress = myAddress[3] + " " + myAddress[2] + " " + myAddress[1] + " " + myAddress[0];
-	            break;
-	        case 3:
-	        	memAddress = myAddress[2] + " " + myAddress[1] + " " + myAddress[0];
-	        	break;
-	        case 2:
-	        	memAddress = myAddress[1] + " " + myAddress[0];
-	        default:
-	        	memAddress = address;
-	            break;
+		if (!member.getMemAddress().equals(address)) {
+			switch (myAddress.length) {
+		        case 6:
+		            memAddress = myAddress[5] + " " + myAddress[3] + " " + myAddress[2] + " " + myAddress[1];
+		            break;
+		        case 5:
+		        	memAddress = myAddress[4] + " " + myAddress[2] + " " + myAddress[1] + " " + myAddress[0];
+		        case 4:
+		        	memAddress = myAddress[3] + " " + myAddress[2] + " " + myAddress[1] + " " + myAddress[0];
+		            break;
+		        case 3:
+		        	memAddress = myAddress[2] + " " + myAddress[1] + " " + myAddress[0];
+		        	break;
+		        case 2:
+		        	memAddress = myAddress[1] + " " + myAddress[0];
+		        default:
+		        	memAddress = address;
+		            break;
+			}
 		}
 		
-		Member m = Member.builder().memId(memId).memPw(memPw).memName(memName).memGender(memGender).memPhone(memPhone).memEmail(memEmail)
-				.memBirthDate(memBirthDate).memAddress(memAddress).memLatitude(memLatitude).memLongitude(memLongitude).build();
+		Member m = Member.builder().memCode(memCode).memPw(memPw).memName(memName).memPhone(memPhone).memEmail(memEmail).memAddress(memAddress)
+				.memLatitude(memLatitude).memLongitude(memLongitude).build();
 	
 		String msg,loc="/";
 		try {
-			int result = new MemberService().insertMember(m);
-			msg="회원가입성공!";
+			int result = new MemberService().updateMember(m);
+			msg="정보수정성공!";
 			loc="/";
 		}catch(RuntimeException e) {
 			e.printStackTrace();
-			msg="회원가입실패! 다시 시도하세요!";
-			loc="/member/enroll.do";
+			msg="정보수정실패! 다시 시도하세요!";
+			loc="/member/info.do";
 		}
 		request.setAttribute("msg",msg);
 		request.setAttribute("loc", loc);

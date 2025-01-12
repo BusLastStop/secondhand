@@ -31,8 +31,8 @@ public class CommodityReportBoardServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<CommodityBoardReport> reportList = new CommodityBoardReportService().selectCommodiryBoardReportList();
-		request.setAttribute("reportList", reportList);
+//		List<CommodityBoardReport> reportList = new CommodityBoardReportService().selectCommodiryBoardReportList();
+//		request.setAttribute("reportList", reportList);
 		request.getRequestDispatcher("/WEB-INF/views/admin/commodityReport.jsp").forward(request, response);
 	}
 

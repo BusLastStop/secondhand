@@ -1,28 +1,23 @@
 package com.bus.controller.member;
 
 import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.bus.model.dto.CommodityBoard;
-import com.bus.model.service.CommodityBoardService;
-
 /**
- * Servlet implementation class CommodityBoardServlet
+ * Servlet implementation class BoardCommentInsertServlet
  */
-@WebServlet("/commodity/board.do")
-public class CommodityBoardListServlet extends HttpServlet {
+@WebServlet("/board/insertcomment.do")
+public class BoardCommentInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CommodityBoardListServlet() {
+    public BoardCommentInsertServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,8 +26,11 @@ public class CommodityBoardListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<CommodityBoard> commodityBoards = new CommodityBoardService().selectCommodityBoard();
-		request.getRequestDispatcher("/WEB-INF/views/board/commodityList.jsp").forward(request, response);
+		String content=request.getParameter("content");
+		int boardNo=Integer.parseInt(request.getParameter("boardRef"));
+		int level=Integer.parseInt(request.getParameter("level"));
+		String writer=request.getParameter("writer");
+		Integer boardCommentRef=Integer.parseInt(request.getParameter("boardCommentRef"));
 	}
 
 	/**

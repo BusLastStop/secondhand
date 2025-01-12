@@ -18,7 +18,9 @@ public class MemberResetPassword {
 	private Date memBirthDate;
 	private String memEmail;
 	private String memPhone;
-	private String repCreate;
+	private String repCreated;
 	private String memState;
+	private String memResult;
+	private String memCode;
 
 }

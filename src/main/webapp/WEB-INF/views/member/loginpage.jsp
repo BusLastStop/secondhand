@@ -45,9 +45,9 @@
 	<div id="login-container">
 		<h1>로그인!</h1>
 		<form id="login" class="point" action="${pageContext.request.contextPath}/member/login.do" method="post">
-			<input type="text" name="userId">
-			<input type="password" name="userPwd">
-			<label style="display:flex;align-items:center;"><input type="checkbox" name="saveId">로그인 상태 유지</label>
+			<input type="text" name="memId" value="">
+			<input type="password" name="memPw" value="">
+			<label style="display:flex;align-items:center;"><input type="checkbox" name="saveId" ${cookie.saveId!=null?"checked":""}>로그인 상태 유지</label>
 			<input type="submit" value="로그인" style="background-color:#90CAF9">
 		</form>
 		<div class="point">

@@ -18,7 +18,6 @@ public class ChattingServlet {
 	
 	@OnOpen
 	public void open(Session session, EndpointConfig config) {
-		System.out.println("손님접속!");
 		try {
 			// 클라이언트에게 메세지를 전송
 			session.getBasicRemote().sendText("채팅접속을 환영합니다.");
@@ -29,8 +28,6 @@ public class ChattingServlet {
 	
 	@OnMessage
 	public void message(Session session, String data) {
-		
-		System.out.println(data);
 		
 		Message m = new Gson().fromJson(data, Message.class);
 		

@@ -55,7 +55,7 @@
 							                <td style="border: 1px solid #ddd; padding: 12px; font-size: 14px;">${reportList.memBirthDate}</td>
 							                <td style="border: 1px solid #ddd; padding: 12px; font-size: 14px;">${reportList.memPhone}</td>
 							                <td style="border: 1px solid #ddd; padding: 12px; font-size: 14px;">
-							                	<fmt:formatDate value="${reportList.repCreate }"pattern="yyyy년 MM월 dd일"/>
+							                	
 							                </td>
 							                <td style="border: 1px solid #ddd; padding: 12px; font-size: 14px;">${reportList.repReason}</td>
 							                <td style="border: 1px solid #ddd; padding: 12px; font-size: 14px;">

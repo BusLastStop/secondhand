@@ -32,8 +32,8 @@ public class MemberReportServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<MemberReport> reportList = new MemberReportService().selectMemberReportList();
-		request.setAttribute("reportList", reportList);
+//		List<MemberReport> reportList = new MemberReportService().selectMemberReportList();
+//		request.setAttribute("reportList", reportList);
 		request.getRequestDispatcher("/WEB-INF/views/admin/memberReport.jsp").forward(request, response);
 	}
 

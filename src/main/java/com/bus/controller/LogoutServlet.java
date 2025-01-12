@@ -1,28 +1,25 @@
-package com.bus.controller.member;
+package com.bus.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.bus.model.dto.CommodityBoard;
-import com.bus.model.service.CommodityBoardService;
+import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class CommodityBoardServlet
+ * Servlet implementation class LogoutServlet
  */
-@WebServlet("/commodity/board.do")
-public class CommodityBoardListServlet extends HttpServlet {
+@WebServlet("/member/logout.do")
+public class LogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CommodityBoardListServlet() {
+    public LogoutServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,8 +28,13 @@ public class CommodityBoardListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<CommodityBoard> commodityBoards = new CommodityBoardService().selectCommodityBoard();
-		request.getRequestDispatcher("/WEB-INF/views/board/commodityList.jsp").forward(request, response);
+		HttpSession session=request.getSession(false);
+		
+		if(session!=null) {
+			session.invalidate();//session객체 삭제
+		}
+		
+		response.sendRedirect(request.getContextPath());
 	}
 
 	/**

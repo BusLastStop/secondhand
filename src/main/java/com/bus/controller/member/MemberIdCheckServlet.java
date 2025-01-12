@@ -1,7 +1,6 @@
 package com.bus.controller.member;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,20 +8,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.bus.model.dto.CommodityBoard;
-import com.bus.model.service.CommodityBoardService;
+import com.bus.model.dto.member.Member;
+import com.bus.model.service.member.MemberService;
 
 /**
- * Servlet implementation class CommodityBoardServlet
+ * Servlet implementation class MemberIdCheckServlet
  */
-@WebServlet("/commodity/board.do")
-public class CommodityBoardListServlet extends HttpServlet {
+@WebServlet("/member/idCheck.do")
+public class MemberIdCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CommodityBoardListServlet() {
+    public MemberIdCheckServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,8 +30,10 @@ public class CommodityBoardListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<CommodityBoard> commodityBoards = new CommodityBoardService().selectCommodityBoard();
-		request.getRequestDispatcher("/WEB-INF/views/board/commodityList.jsp").forward(request, response);
+		String memId = request.getParameter("memId");
+		Member m = new MemberService().memberIdCheck(memId);
+		request.setAttribute("result", m==null);
+		request.getRequestDispatcher("/WEB-INF/views/member/idCheck.jsp").forward(request, response);
 	}
 
 	/**

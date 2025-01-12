@@ -21,6 +21,8 @@ public class CommodityBoard {
 	private Date boaUpdate;
 	private String boaComName;
 	private int boaComPrice;
-	private String boaFilePath;
+	private String boaFileName;
+	private String boaFileReName;
+	private String boaMemName;
 
 }

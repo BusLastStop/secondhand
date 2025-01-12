@@ -1,28 +1,23 @@
-package com.bus.controller.member;
+package com.bus.controller;
 
 import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.bus.model.dto.CommodityBoard;
-import com.bus.model.service.CommodityBoardService;
-
 /**
- * Servlet implementation class CommodityBoardServlet
+ * Servlet implementation class loginServlet
  */
-@WebServlet("/commodity/board.do")
-public class CommodityBoardListServlet extends HttpServlet {
+@WebServlet("/member/loginPage.do")
+public class LoginPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CommodityBoardListServlet() {
+    public LoginPageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,8 +26,7 @@ public class CommodityBoardListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<CommodityBoard> commodityBoards = new CommodityBoardService().selectCommodityBoard();
-		request.getRequestDispatcher("/WEB-INF/views/board/commodityList.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/member/loginpage.jsp").forward(request, response);
 	}
 
 	/**

@@ -138,15 +138,25 @@
 			<div style="display:flex;justify-content:center;align-items:center;">
 				<h2 style="margin:5px 0 5px 0;"><a href="${path}/commodity/board.do">상품 목록</a></h2>
 				<h2 style="margin:5px 0 5px 0;"><a href="${path}/commoditymap/board.do">지도, 상품</a></h2>
-				<h2 style="margin:5px 0 5px 0;"><a href="${path}/commodity/report/board.do">상품 신고 관리</a></h2>
-				<h2 style="margin:5px 0 5px 0;"><a href="${path}/member/report.do">회원 신고 관리</a></h2>
-				<h2 style="margin:5px 0 5px 0;"><a href="${path}/member/reset/password.do">회원 잠금 해지 요청</a></h2>
+				<c:if test="${sessionScope.loginMember.memAuthority=='m' || sessionScope.loginMember.memAuthority=='M'}">
+					<h2 style="margin:5px 0 5px 0;"><a href="${path}/commodity/report/board.do">상품 신고 관리</a></h2>
+					<h2 style="margin:5px 0 5px 0;"><a href="${path}/member/report.do">회원 신고 관리</a></h2>
+					<h2 style="margin:5px 0 5px 0;"><a href="${path}/member/reset/password.do">회원 잠금 해지 요청</a></h2>
+				</c:if>
 			</div>
 		</div>
 		<div style="display:flex;justify-content:center;align-items:center;">
-			<h2 style="margin:8px 0 0 10px;"><a href="${path}/insert/commodity/board.do">판매하기</a></h2>
-				<h2 style="margin:8px 0 0 10px;"><a href="${path}/member/login.do">로그인</a></h2>
-				<h2 style="margin:8px 0 0 10px;"><a href="${path}/info/member.do">마이페이지</a></h2>
+			<c:if test="${sessionScope.loginMember != null}">
+				<h2 style="margin:8px 0 0 10px;"><a href="${path}/insert/commodity/board.do">판매하기</a></h2>
+			</c:if>
+			<c:if test="${sessionScope.loginMember==null}">
+				<h2 style="margin:8px 0 0 10px;"><a href="${path}/member/loginPage.do">로그인</a></h2>
+				<h2 style="margin:8px 0 0 10px;"><a href="${path}/member/enroll.do">회원가입</a></h2>
+			</c:if>
+			<c:if test="${sessionScope.loginMember!=null}">
+				<h2 style="margin:8px 0 0 10px;"><a href="${path}/member/logout.do">로그아웃</a></h2>
+				<h2 style="margin:8px 0 0 10px;"><a href="${path}/member/info.do?memId=${loginMember.memId}">마이페이지</a></h2>
+			</c:if>
 		</div>
 	</div>
 	<!-- 채팅 이모지 -->

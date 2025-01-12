@@ -33,25 +33,36 @@ public class CommodityBoardInsertEndServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String path=getServletContext().getRealPath("/resources/upload/commodityBoard");
-		System.out.println(path);
+		String filePath=getServletContext().getRealPath("/resources/upload/commodityBoard");
+		String imgPath=getServletContext().getRealPath("/resources/upload/images");
 		MultipartRequest mr=new MultipartRequest(
 					request,
-					path,
+					filePath,
 					1024*1024*100,
 					"utf-8",
 					new DefaultFileRenamePolicy()
 				);
 		
-		String boardTitle=mr.getParameter("boardTitle");
-		String boardWriter=mr.getParameter("boardWriter");
-		String boardContent=mr.getParameter("boardContent");
+		mr=new MultipartRequest(
+				request,
+				imgPath,
+				1024*1024*100,
+				"utf-8",
+				new DefaultFileRenamePolicy()
+				);
 		
-		String originalFileName=mr.getOriginalFileName("upfile");
-		String renamedFileName=mr.getFilesystemName("upfile");
+		String boaTitle=mr.getParameter("boaTitle");
+		String boaMemName=mr.getParameter("boaMemName");
+		String boaContent=mr.getParameter("boaContent");
+		String boaImgName = mr.getParameter("boaImgName");
+		String boaComName = mr.getParameter("boaComName");
+		int boaComPrice = Integer.parseInt(mr.getParameter("boaComPrice"));
 		
-		CommodityBoard b = CommodityBoard.builder().boaCode(renamedFileName).boaComName(renamedFileName).boaComPrice(0).boaContent(boardContent).boaFilePath(path)
-		.boaTitle(boardTitle).build();
+		String originalFileName=mr.getOriginalFileName("boaFileName");
+		String renamedFileName=mr.getFilesystemName("boaFileName");
+		
+		CommodityBoard b = CommodityBoard.builder().boaComName(boaComName).boaComPrice(boaComPrice).boaContent(boaContent)
+				.boaFileName(originalFileName).boaFileReName(renamedFileName).boaTitle(boaTitle).boaMemName(boaMemName).build();
 		
 		int result = new CommodityBoardService().insertCommodityBoard(b);
 		
@@ -59,7 +70,7 @@ public class CommodityBoardInsertEndServlet extends HttpServlet {
 		if(result>0) {
 			msg="게시글 등록성공!";
 			// 카테고리를 사용 하여 분기 처리
-			loc="/insert/commodity/board.do";
+			loc="/commodity/board.do";
 		}else {
 			msg="게시글 등록실패!";
 			loc="/insert/commodity/board.do";
@@ -67,7 +78,7 @@ public class CommodityBoardInsertEndServlet extends HttpServlet {
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
 		
-		request.getRequestDispatcher(getServletContext().getInitParameter("viewpath")+"/common/msg.jsp").forward(request,response);
+		request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
 		
 	}
 

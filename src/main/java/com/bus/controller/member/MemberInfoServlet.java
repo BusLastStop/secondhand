@@ -1,7 +1,6 @@
 package com.bus.controller.member;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,7 +14,7 @@ import com.bus.model.service.member.MemberService;
 /**
  * Servlet implementation class MemberInfoServlet
  */
-@WebServlet("/info/member.do")
+@WebServlet(name="memberInfo", urlPatterns="/member/info.do")
 public class MemberInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

@@ -26,6 +26,7 @@ public class Member {
 	private String memGender;
 	private Date memCreated;
 	private String memIsActive;
-	private String memAuthoity;
+	private String memAuthority;
+	private String memState;
 
 }
